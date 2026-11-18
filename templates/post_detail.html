@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+{% block title %}{{ post.title }} — My Blog{% endblock %}
+{% block content %}
+<main class="container my-5 article"><a href="{% url 'home' %}" class="btn btn-outline-secondary btn-sm mb-4">← Back to home</a>
+  {% if post.image %}<img src="{{ post.image.url }}" alt="{{ post.title }}" class="post-detail-img">{% endif %}
+  <h1 class="fw-bold">{{ post.title }}</h1><p class="text-muted">{{ post.author }} · {{ post.created_at|date:'d F Y' }}</p><hr>
+  <div class="post-content">{{ post.content|linebreaks }}</div>
+</main>
+{% endblock %}

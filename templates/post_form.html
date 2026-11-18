@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+{% block title %}{{ action }} — My Blog{% endblock %}
+{% block content %}
+<main class="container my-4" style="max-width:760px"><div class="form-card"><h1 class="h2 mb-4">{{ action }}</h1>
+<form method="post" enctype="multipart/form-data">{% csrf_token %}
+{% for field in form %}<div class="mb-3"><label class="form-label fw-semibold" for="{{ field.id_for_label }}">{{ field.label }}</label>{{ field }}{% if field.help_text %}<div class="form-text">{{ field.help_text }}</div>{% endif %}{% for error in field.errors %}<div class="text-danger">{{ error }}</div>{% endfor %}</div>{% endfor %}
+<div class="d-flex gap-2"><button class="btn btn-primary" type="submit">Save post</button><a href="{% url 'dashboard' %}" class="btn btn-outline-secondary">Cancel</a></div>
+</form></div></main>
+{% endblock %}

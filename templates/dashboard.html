@@ -1,0 +1,8 @@
+{% extends 'base.html' %}
+{% block title %}Dashboard — My Blog{% endblock %}
+{% block content %}
+<main class="container my-4"><div class="d-flex justify-content-between align-items-center mb-4"><h1 class="h2">Dashboard</h1><a href="{% url 'post_new' %}" class="btn btn-primary">+ New post</a></div>
+{% if posts %}<div class="table-responsive card shadow-sm"><table class="table table-hover mb-0"><thead class="table-primary"><tr><th>Title</th><th>Author</th><th>Date</th><th>Actions</th></tr></thead><tbody>
+{% for post in posts %}<tr><td><a href="{% url 'post_detail' post.slug %}">{{ post.title }}</a></td><td>{{ post.author }}</td><td>{{ post.created_at|date:'d M Y' }}</td><td><a href="{% url 'post_edit' post.pk %}" class="btn btn-sm btn-outline-primary">Edit</a> <a href="{% url 'post_delete' post.pk %}" class="btn btn-sm btn-outline-danger">Delete</a></td></tr>{% endfor %}
+</tbody></table></div>{% else %}<p class="text-muted">No posts yet. <a href="{% url 'post_new' %}">Write one</a>.</p>{% endif %}</main>
+{% endblock %}
